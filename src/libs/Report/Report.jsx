@@ -1,6 +1,6 @@
-
 import SummaryHeader from "./components/SummaryHeader";
 import { useEffect } from "react";
+import SummaryListTable from "./components/SummaryListTable.jsx";
 // import { codeToHtml } from "shiki";
 
 function Editor({ className, text }) {
@@ -18,6 +18,7 @@ function Editor({ className, text }) {
   return (
     <div className={className}>
       <SummaryHeader />
+      <SummaryListTable />
       {text}
       {/*<div*/}
       {/*  dangerouslySetInnerHTML={{*/}
