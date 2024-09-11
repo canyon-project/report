@@ -1,6 +1,6 @@
 {
   "name": "canyon-report",
-  "version": "0.3.12",
+  "version": "0.3.13",
   "type": "module",
   "main": "dist/canyon-report.cjs",
   "module": "dist/canyon-report.js",
@@ -17,7 +17,8 @@
   },
   "dependencies": {
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "shiki": "^1.16.3"
   },
   "devDependencies": {
     "@types/react": "^18.3.3",
