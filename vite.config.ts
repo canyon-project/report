@@ -6,7 +6,7 @@ import dts from "vite-plugin-dts";
 // https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react({}), dts()],
-  base: "/canyon-report/",
+  base: "/report/",
   build:
     process.env.USE_DTS_PLUGIN === "true"
       ? {
