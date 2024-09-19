@@ -1,5 +1,7 @@
 import { Report } from "./libs";
 import { useState } from "react";
+import coverageSummaryData from "./assets/coverage-summary.json";
+
 function App() {
   // 当前激活的路径，默认值是哈希值
   const [activePath, setActivePath] = useState(window.location.hash.slice(1));
@@ -25,7 +27,7 @@ function App() {
 
   return (
     <div>
-      <Report text={"nihao"} />
+      <Report coverageSummaryData={coverageSummaryData} />
 
       {activePath}
       <a
@@ -33,7 +35,7 @@ function App() {
           onClickFile("packages/canyon-platform/src/App.tsx");
         }}
       >
-        点击
+        {/*点击*/}
       </a>
     </div>
   );

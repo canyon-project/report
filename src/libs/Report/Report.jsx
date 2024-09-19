@@ -3,7 +3,20 @@ import { useEffect } from "react";
 import SummaryListTable from "./components/SummaryListTable.jsx";
 // import { codeToHtml } from "shiki";
 
-function Editor({ className, text }) {
+/**
+ * 这是一个示例组件。
+ * @param {Object} props - 组件的属性。
+ * @param {string} props.name - 名称。
+ * @param {number} props.age - 年龄。
+ */
+// eslint-disable-next-line react/prop-types
+function Editor({
+                  dataSource,
+                  value,
+                  loading,
+                  onSelect,
+                  loadData
+}) {
   // const [value, setValue] = useState("");
 
   useEffect(() => {
@@ -17,9 +30,9 @@ function Editor({ className, text }) {
   }, []);
   return (
     <div className={className}>
-      <SummaryHeader />
-      <SummaryListTable />
-      {text}
+      {/*<SummaryHeader />*/}
+      {/*<SummaryListTable />*/}
+      {/*{JSON.stringify(coverageSummaryData)}*/}
       {/*<div*/}
       {/*  dangerouslySetInnerHTML={{*/}
       {/*    __html: value,*/}
