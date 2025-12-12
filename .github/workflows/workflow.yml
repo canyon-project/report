@@ -11,19 +11,31 @@ jobs:
         id: diff
         with:
           script: |
-            const pr = context.payload.pull_request.number;
-            const { data: files } = await github.rest.pulls.listFiles({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: pr
-            });
+            const files = ${{ steps.diff.outputs.result }};
+            const changedLines = {};
 
-            const result = files.map(f => {
-              return {
-                filename: f.filename,
-                patch: f.patch
-              };
-            });
+            for (const file of files) {
+              if (!file.patch) continue;
 
-            console.log("FILES", result);
-            return result;
+              const lines = file.patch.split('\n');
+              let newLine = 0;
+
+              changedLines[file.filename] = [];
+
+              for (const line of lines) {
+                if (line.startsWith('@@')) {
+                  const match = /@@ -\d+(?:,\d+)? \+(\d+)(?:,(\d+))? @@/.exec(line);
+                  if (match) {
+                    newLine = parseInt(match[1], 10);
+                  }
+                } else if (line.startsWith('+') && !line.startsWith('+++')) {
+                  changedLines[file.filename].push(newLine);
+                  newLine++;
+                } else if (!line.startsWith('-')) {
+                  newLine++;
+                }
+              }
+            }
+
+            console.log(JSON.stringify(changedLines, null, 2));
+            return changedLines;
