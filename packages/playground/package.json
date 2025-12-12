@@ -10,9 +10,12 @@
     "preview": "vite preview"
   },
   "dependencies": {
+    "@canyonjs/report": "workspace:^",
+    "@canyonjs/report-core": "workspace:^",
+    "@monaco-editor/react": "^4.7.0",
+    "monaco-editor": "^0.55.1",
     "react": "^19.2.0",
-    "react-dom": "^19.2.0",
-    "@canyonjs/report": "workspace:^"
+    "react-dom": "^19.2.0"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
