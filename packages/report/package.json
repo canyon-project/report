@@ -31,9 +31,7 @@
     "dev": "tsdown --watch",
     "play": "vite",
     "test": "vitest",
-    "typecheck": "tsc --noEmit",
-    "release": "bumpp && pnpm publish",
-    "prepublishOnly": "pnpm run build"
+    "typecheck": "tsc --noEmit"
   },
   "peerDependencies": {
     "react": "^19.2.0",
@@ -45,12 +43,8 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^5.1.1",
-    "@vitest/browser-playwright": "^4.0.15",
-    "bumpp": "^10.3.2",
     "tsdown": "^0.17.0",
     "typescript": "^5.9.3",
-    "vite": "^7.2.6",
-    "vitest": "^4.0.15",
-    "vitest-browser-react": "^2.0.2"
+    "vite": "^7.2.6"
   }
 }
