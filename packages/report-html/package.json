@@ -1,13 +1,13 @@
 {
   "name": "@canyonjs/report-html",
-  "version": "1.0.0-alpha.5",
+  "version": "1.0.0-alpha.6",
   "scripts": {
     "dev": "rspack dev",
     "build": "rspack build",
     "test": "vitest run --coverage",
     "preview": "rspack preview"
   },
-  "main": "dist/index.js",
+  "main": "index.js",
   "files": ["dist","lib","index.js"],
   "dependencies": {
     "@canyonjs/report-component": "^0.0.1-beta.5",
