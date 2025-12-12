@@ -12,17 +12,102 @@ class CoverageReport {
   initOptions() {
     console.log("initOptions");
   }
+
+  copyDistToTarget(sourceDir, targetDir) {
+    // 确保目标目录存在
+    if (!fs.existsSync(targetDir)) {
+      fs.mkdirSync(targetDir, { recursive: true });
+    }
+
+    // 读取源目录中的所有文件和文件夹
+    const items = fs.readdirSync(sourceDir);
+
+    items.forEach(item => {
+      const sourcePath = path.join(sourceDir, item);
+      const targetPath = path.join(targetDir, item);
+
+      const stat = fs.statSync(sourcePath);
+
+      if (stat.isDirectory()) {
+        // 递归复制子目录
+        this.copyDistToTarget(sourcePath, targetPath);
+      } else {
+        // 复制文件
+        fs.copyFileSync(sourcePath, targetPath);
+      }
+    });
+  }
+
+  buildReportData(coverage) {
+    // 计算总体统计信息
+    const summary = {};
+
+    // 构建文件数组
+    const files = Object.keys(coverage).map(filePath => {
+      const fileData = coverage[filePath];
+
+      // 读取源文件内容
+      let source = fileData.source || "";
+      if (!source && fs.existsSync(filePath)) {
+        try {
+          source = fs.readFileSync(filePath, "utf8");
+        } catch (error) {
+          console.warn(`无法读取文件 ${filePath}:`, error.message);
+          source = "";
+        }
+      }
+
+      return {
+        source,
+        path: filePath,
+        statementMap: fileData.statementMap || {},
+        fnMap: fileData.fnMap || {},
+        branchMap: fileData.branchMap || {},
+        s: fileData.s || {},
+        f: fileData.f || {},
+        b: fileData.b || {}
+      };
+    });
+
+    return {
+      type: "v8",
+      reportPath: "coverage/index.html",
+      version: "2.12.9",
+      watermarks: {
+        bytes: [50, 80],
+        statements: [50, 80],
+        branches: [50, 80],
+        functions: [50, 80],
+        lines: [50, 80]
+      },
+      summary,
+      files
+    };
+  }
   async generate({coverage,targetDir}) {
     this.initOptions();
-    // 1. 获取当前工作目录，获取npm包中的dist目录
-    // const sourceDir = path.resolve(__dirname, "../dist");
-
-    // 2. 获取coverage-final.json文件
 
     const cov = JSON.stringify(coverage);
-
     console.log(cov)
-    return {};
+
+    // 构建报告数据
+    const reportData = this.buildReportData(coverage);
+
+    // 复制dist文件夹内容到targetDir
+    const sourceDir = path.resolve(__dirname, "../dist");
+    if (fs.existsSync(sourceDir)) {
+      this.copyDistToTarget(sourceDir, targetDir);
+    }
+
+    // 生成 report-data.js 文件
+    const reportDataContent = `window.reportData = ${JSON.stringify(reportData, null, 2)};`;
+    const reportDataPath = path.join(targetDir, "report-data.js");
+    fs.writeFileSync(reportDataPath, reportDataContent, "utf8");
+
+    return {
+      reportPath: path.join(targetDir, "index.html"),
+      reportData
+    };
   }
 }
 
