@@ -1,0 +1,29 @@
+name: Get PR changed lines
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  diff:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/github-script@v7
+        id: diff
+        with:
+          script: |
+            const pr = context.payload.pull_request.number;
+            const { data: files } = await github.rest.pulls.listFiles({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: pr
+            });
+
+            const result = files.map(f => {
+              return {
+                filename: f.filename,
+                patch: f.patch
+              };
+            });
+
+            console.log("FILES", result);
+            return result;
