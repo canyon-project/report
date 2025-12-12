@@ -1,5 +1,5 @@
 
-import {initCanyonReportCore} from '@canyonjs/report-core'
+import {initCanyonReportCore} from '../core'
 import {useEffect, useRef} from "react";
 function CanyonReport() {
   const ref = useRef(null)

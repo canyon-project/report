@@ -1,4 +1,5 @@
 export function initCanyonReportCore(dom, options) {
+  // @ts-ignore
   console.log(dom,options,window.monaco,window.monaco.editor)
   // 加载Monaco Editor资源
   // @ts-ignore
