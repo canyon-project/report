@@ -1,5 +1,5 @@
-const fs = require("fs");
-const path = require("path");
+const fs = require('node:fs');
+const path = require('node:path');
 
 class CoverageReport {
   constructor(options = {}) {
@@ -9,8 +9,7 @@ class CoverageReport {
     this.initOptions();
   }
 
-  initOptions() {
-  }
+  initOptions() {}
 
   copyDistToTarget(sourceDir, targetDir) {
     // 确保目标目录存在
@@ -21,7 +20,7 @@ class CoverageReport {
     // 读取源目录中的所有文件和文件夹
     const items = fs.readdirSync(sourceDir);
 
-    items.forEach(item => {
+    items.forEach((item) => {
       const sourcePath = path.join(sourceDir, item);
       const targetPath = path.join(targetDir, item);
 
@@ -42,17 +41,17 @@ class CoverageReport {
     const summary = {};
 
     // 构建文件数组
-    const files = Object.keys(coverage).map(filePath => {
+    const files = Object.keys(coverage).map((filePath) => {
       const fileData = coverage[filePath];
 
       // 读取源文件内容
-      let source = fileData.source || "";
+      let source = fileData.source || '';
       if (!source && fs.existsSync(filePath)) {
         try {
-          source = fs.readFileSync(filePath, "utf8");
+          source = fs.readFileSync(filePath, 'utf8');
         } catch (error) {
           console.warn(`无法读取文件 ${filePath}:`, error.message);
-          source = "";
+          source = '';
         }
       }
 
@@ -64,52 +63,50 @@ class CoverageReport {
         branchMap: fileData.branchMap || {},
         s: fileData.s || {},
         f: fileData.f || {},
-        b: fileData.b || {}
+        b: fileData.b || {},
       };
     });
 
     return {
-      type: "v8",
-      reportPath: "coverage/index.html",
-      version: "2.12.9",
+      type: 'v8',
+      reportPath: 'coverage/index.html',
+      version: '2.12.9',
       watermarks: {
         bytes: [50, 80],
         statements: [50, 80],
         branches: [50, 80],
         functions: [50, 80],
-        lines: [50, 80]
+        lines: [50, 80],
       },
       summary,
-      files
+      files,
     };
   }
-  async generate({coverage,targetDir}) {
+  async generate({ coverage, targetDir }) {
     this.initOptions();
 
-    const cov = JSON.stringify(coverage);
+    const _cov = JSON.stringify(coverage);
 
     // 构建报告数据
     const reportData = this.buildReportData(coverage);
 
     // 复制dist文件夹内容到targetDir
-    const sourceDir = path.resolve(__dirname, "../dist");
+    const sourceDir = path.resolve(__dirname, '../dist');
     if (fs.existsSync(sourceDir)) {
       this.copyDistToTarget(sourceDir, targetDir);
     }
 
     // 生成 report-data.js 文件
     const reportDataContent = `window.reportData = ${JSON.stringify(reportData, null, 2)};`;
-    const reportDataPath = path.join(targetDir, "report-data.js");
-    fs.writeFileSync(reportDataPath, reportDataContent, "utf8");
+    const reportDataPath = path.join(targetDir, 'report-data.js');
+    fs.writeFileSync(reportDataPath, reportDataContent, 'utf8');
 
     return {
-      reportPath: path.join(targetDir, "index.html"),
-      reportData
+      reportPath: path.join(targetDir, 'index.html'),
+      reportData,
     };
   }
 }
 
-const CR = function (options) {
-  return new CoverageReport(options);
-};
+const CR = (options) => new CoverageReport(options);
 module.exports = CR;

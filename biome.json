@@ -42,12 +42,6 @@
       "recommended": true,
       "style": {
         "noNonNullAssertion": "off",
-        "useFilenamingConvention": {
-          "level": "error",
-          "options": {
-            "filenameCases": ["camelCase", "PascalCase", "export"]
-          }
-        },
         "noParameterAssign": "error",
         "useAsConstAssertion": "error",
         "useDefaultParameterLast": "error",

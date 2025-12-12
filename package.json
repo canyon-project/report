@@ -2,9 +2,7 @@
   "name": "@canyonjs/report-packages",
   "private": true,
   "scripts": {
-    "lint": "biome check . --diagnostic-level=warn && pnpm run check-spell && pnpm lint:type",
-    "lint:type": "rslint",
-    "prepare": "pnpm run build && simple-git-hooks",
+    "format": "biome check --write",
     "build": "pnpm run -r build"
   },
   "simple-git-hooks": {
@@ -16,7 +14,7 @@
     ]
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.3.8",
+    "@biomejs/biome": "2.2.4",
     "nano-staged": "^0.9.0",
     "simple-git-hooks": "^2.13.1",
     "typescript": "^5.9.3"

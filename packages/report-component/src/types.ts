@@ -1,7 +1,4 @@
-import type {
-  CoverageSummaryData,
-  FileCoverageData,
-} from 'istanbul-lib-coverage';
+import type { FileCoverageData } from 'istanbul-lib-coverage';
 
 /**
  * 文件数据响应接口
@@ -20,5 +17,5 @@ export interface CanyonReportProps {
   name: string;
   /** 当前选中的文件 */
   value: string;
-  dataSource: any[]
+  dataSource: any[];
 }
