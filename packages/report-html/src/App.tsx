@@ -1,4 +1,4 @@
-import CanyonReport from '@canyonjs/report'
+import CanyonReport from '@canyonjs/report-component'
 function App() {
   return (
     <div>
