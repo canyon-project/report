@@ -68,6 +68,7 @@ class CoverageReport {
     });
 
     return {
+      instrumentCwd:process.cwd(),
       type: 'v8',
       reportPath: 'coverage/index.html',
       version: '2.12.9',
@@ -83,6 +84,7 @@ class CoverageReport {
     };
   }
   async generate({ coverage, targetDir }) {
+    // console.log(targetDir,__dirname,process.cwd())
     this.initOptions();
 
     const _cov = JSON.stringify(coverage);

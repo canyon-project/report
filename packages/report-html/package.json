@@ -14,7 +14,8 @@
     "index.js"
   ],
   "dependencies": {
-    "@canyonjs/report-component": "^0.0.1-beta.5",
+    "@canyonjs/report-component": "^0.0.1-beta.6",
+    "canyon-data": "2.0.0-beta.36",
     "istanbul-lib-report": "^3.0.1",
     "monaco-editor": "^0.55.1",
     "react": "^19.2.1",
