@@ -1,7 +1,7 @@
 {
-  "name": "react-components-starter",
+  "name": "@canyonjs/report",
   "type": "module",
-  "version": "0.0.2",
+  "version": "0.0.9-beta.1",
   "description": "A starter for creating a React component library.",
   "author": "Author Name <author.name@mail.com>",
   "license": "MIT",
@@ -46,5 +46,8 @@
     "tsdown": "^0.17.0",
     "typescript": "^5.9.3",
     "vite": "^7.2.6"
+  },
+  "dependencies": {
+    "antd": "^6.1.0"
   }
 }
