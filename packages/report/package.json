@@ -49,6 +49,7 @@
     "vite": "^7.2.6"
   },
   "dependencies": {
-    "antd": "^6.1.0"
+    "antd": "^6.1.0",
+    "@canyonjs/report-core": "workspace:^"
   }
 }
