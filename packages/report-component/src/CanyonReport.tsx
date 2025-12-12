@@ -1,5 +1,5 @@
-import { CanyonReportProps } from './types';
-import {FC} from "react";
+import type {CanyonReportProps} from './types';
+import type {FC} from "react";
 import CoverageDetail from "./widgets/CoverageDetail";
 import {add} from "./helpers/add";
 

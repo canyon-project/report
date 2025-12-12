@@ -49,6 +49,8 @@
     "vite": "^7.2.6"
   },
   "dependencies": {
-    "antd": "^6.1.0"
+    "@monaco-editor/react": "^4.7.0",
+    "antd": "^6.1.0",
+    "monaco-editor": "^0.55.1"
   }
 }
