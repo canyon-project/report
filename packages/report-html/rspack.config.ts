@@ -65,5 +65,6 @@ export default defineConfig({
 	},
 	experiments: {
 		css: true
-	}
+	},
+  devtool: false, // 设置为false即可关闭所有环境的sourcemap
 });
