@@ -1,4 +1,4 @@
-import { CanyonReport } from '../../src/index';
+import { CanyonReport } from '../../src';
 
 console.log(window.reportData, 'window.reportData');
 

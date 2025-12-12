@@ -39,6 +39,7 @@
   },
   "devDependencies": {
     "@tsconfig/strictest": "^2.0.8",
+    "@types/istanbul-lib-coverage": "^2.0.6",
     "@types/node": "^24.10.1",
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
