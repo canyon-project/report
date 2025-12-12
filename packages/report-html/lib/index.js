@@ -10,7 +10,6 @@ class CoverageReport {
   }
 
   initOptions() {
-    console.log("initOptions");
   }
 
   copyDistToTarget(sourceDir, targetDir) {
@@ -88,7 +87,6 @@ class CoverageReport {
     this.initOptions();
 
     const cov = JSON.stringify(coverage);
-    console.log(cov)
 
     // 构建报告数据
     const reportData = this.buildReportData(coverage);
