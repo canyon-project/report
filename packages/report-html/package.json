@@ -10,7 +10,7 @@
   "main": "dist/index.js",
   "files": ["dist","lib","dist/index.js"],
   "dependencies": {
-    "@canyonjs/report-component": "workspace:^",
+    "@canyonjs/report-component": "^0.0.1-beta.5",
     "monaco-editor": "^0.55.1",
     "react": "^19.2.1",
     "react-dom": "^19.2.1"
