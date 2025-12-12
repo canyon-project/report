@@ -10,6 +10,7 @@ window.reportData = {
     lines: [50, 80],
   },
   summary: {},
+  instrumentCwd:'/Users/travzhang/github.com/istanbuljs/istanbuljs',
   files: [
     {
       source:

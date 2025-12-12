@@ -6,10 +6,7 @@ import type { FileCoverageData } from 'istanbul-lib-coverage';
 export interface FileDataResponse {
   fileCoverage: FileCoverageData;
   fileContent: string;
-  fileCodeChange: {
-    additions: number[];
-    deletions: number[];
-  }[];
+  fileCodeChange: number[];
 }
 
 export interface CanyonReportProps {
@@ -18,4 +15,5 @@ export interface CanyonReportProps {
   /** 当前选中的文件 */
   value: string;
   dataSource: any[];
+  onSelect: (val: string) => Promise<FileDataResponse>;
 }

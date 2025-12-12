@@ -10,11 +10,8 @@
   "files": {
     "ignoreUnknown": true,
     "includes": [
-      "**",
-      "!**/*.vue",
-      "!**/dist",
-      "!**/dist-types",
-      "!**/.vscode-test.mjs"
+      "**/*.ts",
+      "**/*.tsx"
     ]
   },
   "formatter": {

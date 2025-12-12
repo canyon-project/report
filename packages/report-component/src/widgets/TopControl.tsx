@@ -48,12 +48,12 @@ const TopControl: FC<{
               }}
               options={[
                 {
-                  label: t('components.topControl.codeTree'),
+                  label: 'Code Tree',
                   value: 'tree',
                   // icon: <Icon component={PhTreeViewIcon} />,
                 },
                 {
-                  label: t('components.topControl.fileList'),
+                  label: 'File List',
                   value: 'list',
                   // icon: <BarsOutlined />,
                 },
@@ -62,7 +62,7 @@ const TopControl: FC<{
 
             <span style={{ fontSize: '14px' }}>
               <span style={{ marginBottom: '6px' }}>
-                {total} {t('components.topControl.totalFiles')}
+                {total} {'Total Files'}
               </span>
             </span>
           </Space>
@@ -82,7 +82,7 @@ const TopControl: FC<{
             }}
           >
             <Typography.Text type={'secondary'} style={{ fontSize: '12px' }}>
-              {t('components.topControl.onlyChanged')}:{' '}
+              {'Only Changed'}:{' '}
             </Typography.Text>
             <Switch
               checked={onlyChange}
@@ -92,7 +92,7 @@ const TopControl: FC<{
           </div>
           <Divider type={'vertical'} />
           <Input
-            placeholder={t('components.topControl.searchPlaceholder')}
+            placeholder={'Enter the file path to search'}
             value={filenameKeywords}
             // addonBefore={<SearchOutlined />}
             style={{

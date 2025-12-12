@@ -1,20 +1,32 @@
 import { useEffect, useRef } from 'react';
-import { initCanyonReportCore } from '../core';
 
-function CanyonReport() {
+
+function CanyonReport({
+                        fileContent,
+                        fileCoverage,
+                        fileCodeChange
+                      }) {
   const ref = useRef(null);
   useEffect(() => {
     if (ref.current) {
-      initCanyonReportCore(ref.current, {
-        value: 'const a = 1',
+      const dom = ref.current;
+      const options = {
+        value: fileContent,
         language: 'javascript',
-        theme: 'vs-dark',
-      });
+        // theme: 'vs-dark',
+      }
+
+      if (window.monaco?.editor && dom) {
+        // 如果已经加载，直接创建编辑器
+        // @ts-expect-error
+        const _editor = window.monaco.editor.create(dom, options);
+      }
+
     }
   }, []);
   return (
     <div>
-      <div ref={ref} style={{ height: '300px', border: '1px solid #000' }} />
+      <div ref={ref} style={{ height: 'calc(100vh - 150px)' }} />
     </div>
   );
 }

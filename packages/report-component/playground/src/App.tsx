@@ -1,12 +1,49 @@
 import { CanyonReport } from '../../src';
-
-console.log(window.reportData, 'window.reportData');
+import {genSummaryMapByCoverageMap} from 'canyon-data'
+import {useState} from "react";
 
 function App() {
-  const { files: dataSource = [] } = window.reportData;
+
+  const [value,setValue] = useState('')
+
+  const { files: dataSource = [],instrumentCwd } = window.reportData;
+
+  const _dataSource = dataSource.map(item=>{
+    return {
+      ...item,
+      path: item.path.replace(instrumentCwd+'/','')
+    }
+  })
+
+  const dddd = genSummaryMapByCoverageMap(_dataSource.reduce((acc, cur) => {
+    acc[cur.path] = cur;
+    return acc;
+  },{}))
+
+
+  function onSelect(val) {
+    return new Promise((resolve) => {
+      setValue(val)
+      const file = _dataSource.find(item=>item.path===val);
+      if (file) {
+        resolve({
+          fileCoverage: file,
+          fileContent: file.source,
+          fileCodeChange: [],
+        });
+      } else {
+        resolve({
+          fileCoverage: undefined,
+          fileContent: '',
+          fileCodeChange: [],
+        });
+      }
+    });
+  }
+
   return (
     <div>
-      <CanyonReport name={'未命名'} value={'path/to'} dataSource={dataSource} />
+      <CanyonReport name={'All files'} value={value} dataSource={Object.values(dddd)} onSelect={onSelect} />
     </div>
   );
 }

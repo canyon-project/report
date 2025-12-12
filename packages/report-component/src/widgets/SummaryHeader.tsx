@@ -1,6 +1,7 @@
 import { Tag, Typography, theme } from 'antd';
 import type { CoverageSummaryData } from 'istanbul-lib-coverage';
 import type { FC } from 'react';
+import {getColor} from "../helpers/color";
 
 const { Text } = Typography;
 
@@ -117,7 +118,7 @@ const SummaryMetric: FC<{
                   {value.pct}%
                 </span>
                 <Text style={{ fontSize: '14px' }} type={'secondary'}>
-                  {t(`components.summaryMetric.${key}`)}:
+                  {t(`${key}`)}:
                 </Text>
                 <Tag bordered={false}>
                   {value.covered}/{value.total}
@@ -137,7 +138,7 @@ const SummaryBar: FC<{ pct: number }> = ({ pct }) => {
         height: '8px',
         width: '100%',
         marginBottom: '6px',
-        // backgroundColor: getColor(pct),
+        backgroundColor: getColor(pct),
       }}
     />
   );

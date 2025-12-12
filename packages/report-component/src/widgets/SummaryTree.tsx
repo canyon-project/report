@@ -1,19 +1,24 @@
+import { FileOutlined, FolderFilled } from '@ant-design/icons';
 import { ConfigProvider, Progress, Table } from 'antd';
 import type { CoverageSummaryData } from 'istanbul-lib-coverage';
-import type { CSSProperties, FC } from 'react';
-import Highlighter from 'react-highlight-words';
+import type React from 'react';
+import type { FC } from 'react';
 import { getColor } from '../helpers/color';
+// import { getColor } from "../helpers";
 
-// import TextHighlight from "../components/TextHighlight";
+function checkSuffix(str: string) {
+  console.log(str);
+  return true;
+}
 
-const t = (msg: string) => msg;
-const SummaryList: FC<{
+const SummaryTree: FC<{
   dataSource: (CoverageSummaryData & { path: string })[];
   onSelect: (path: string) => void;
-  filenameKeywords: string;
-  style?: CSSProperties;
-  onlyChange: boolean;
-}> = ({ dataSource, onSelect, filenameKeywords, style, onlyChange }) => {
+  style?: React.CSSProperties;
+  onlyChange: boolean
+}> = ({ dataSource, onSelect, style,onlyChange }) => {
+  const t = (res: string) => res;
+
   const columns = [
     {
       title: t('Files'),
@@ -23,20 +28,19 @@ const SummaryList: FC<{
         return (
           <a
             style={{
-              width: '420px',
-              display: 'block',
-              overflowWrap: 'break-word',
+              display: 'flex',
+              gap: '6px',
             }}
             onClick={() => {
               onSelect(text);
             }}
           >
-            <Highlighter
-              highlightClassName="YourHighlightClass"
-              searchWords={[filenameKeywords]}
-              autoEscape={true}
-              textToHighlight={text}
-            />
+            {/\.(js|jsx|ts|tsx|vue)$/.test(text) && checkSuffix(text) ? (
+              <FileOutlined style={{ fontSize: '16px' }} />
+            ) : (
+              <FolderFilled style={{ fontSize: '16px' }} />
+            )}
+            {text.split('/').at(-1)}
           </a>
         );
       },
@@ -61,56 +65,48 @@ const SummaryList: FC<{
       title: t('Change Statements'),
       key: 'changestatements',
       dataIndex: ['changestatements'],
-      width: '220px',
-      render(_) {
-        _ = _ || {
-          pct: 100,
-          total: 0,
-          covered: 0,
-        };
-        return (
-          <div
+      width:'220px',
+      render(_){
+        _=_||{
+          pct:100,
+          total:0,
+          covered:0
+        }
+        return <div style={{
+          display:'flex',
+          alignItems:'center'
+        }}>
+          <Progress
+            percent={_.pct}
+            strokeLinecap='butt'
+            size={'small'}
+            strokeColor={getColor(_.pct)}
             style={{
-              display: 'flex',
-              alignItems: 'center',
+              width:'100px',
+              paddingRight: '5px',
+              fontSize:'10px'
             }}
-          >
-            <Progress
-              percent={_.pct}
-              strokeLinecap="butt"
-              size={'small'}
-              strokeColor={getColor(_.pct)}
-              style={{
-                width: '100px',
-                paddingRight: '5px',
-                fontSize: '10px',
-              }}
-              status={'normal'}
-            />
-            <span
-              style={{
-                fontSize: '10px',
-              }}
-            >
-              ({`${_.covered}/${_.total}`})
-            </span>
-          </div>
-        );
-      },
+            status={'normal'}
+          />
+          <span style={{
+            fontSize:'10px'
+          }}>({`${_.covered}/${_.total}`})</span>
+        </div>
+      }
     },
     {
       title: `${t('Coverage')} %`,
       width: '240px',
       key: 'c',
-      sorter: (a, b) => {
+      dataIndex: ['statements', 'pct'],
+      sorter(a, b) {
         return a.statements.pct - b.statements.pct;
       },
-      dataIndex: ['statements', 'pct'],
       render(text) {
         return (
           <Progress
             percent={text}
-            strokeLinecap="butt"
+            strokeLinecap='butt'
             size={'small'}
             strokeColor={getColor(text)}
             style={{
@@ -121,11 +117,7 @@ const SummaryList: FC<{
         );
       },
     },
-  ].filter(
-    (c) =>
-      c.key !== 'changestatements' ||
-      (c.key === 'changestatements' && onlyChange),
-  );
+  ].filter(c=>((c.key!=='changestatements')||(c.key==='changestatements'&&onlyChange)))
   return (
     <div style={style}>
       <ConfigProvider
@@ -136,13 +128,11 @@ const SummaryList: FC<{
         }}
       >
         <Table
+          rowKey={'path'}
           bordered={true}
-          pagination={{
-            defaultPageSize: 15,
-          }}
+          pagination={false}
           size={'small'}
           dataSource={dataSource}
-          rowKey={'path'}
           columns={columns}
         />
       </ConfigProvider>
@@ -150,4 +140,4 @@ const SummaryList: FC<{
   );
 };
 
-export default SummaryList;
+export default SummaryTree;
