@@ -1,10 +1,10 @@
-import { MyButton } from '@canyonjs/report'
+import CanyonReport from '@canyonjs/report'
 
 function App() {
 
   return (
     <div>
-      <MyButton type={'primary'}/>
+      <CanyonReport name={'s'} value={'nihao'}/>
     </div>
   )
 }

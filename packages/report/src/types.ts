@@ -1,0 +1,23 @@
+import type {
+  CoverageSummaryData,
+  FileCoverageData,
+} from 'istanbul-lib-coverage';
+
+/**
+ * 文件数据响应接口
+ */
+export interface FileDataResponse {
+  fileCoverage: FileCoverageData;
+  fileContent: string;
+  fileCodeChange: {
+    additions: number[];
+    deletions: number[];
+  }[];
+}
+
+export interface CanyonReportProps {
+  /** 报告名称 */
+  name: string;
+  /** 当前选中的文件 */
+  value: string;
+}

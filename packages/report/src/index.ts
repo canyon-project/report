@@ -1,1 +1,1 @@
-export { MyButton } from './MyButton'
+export { CanyonReport, type CanyonReportProps, default } from './CanyonReport';
