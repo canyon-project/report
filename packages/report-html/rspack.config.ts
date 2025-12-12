@@ -1,7 +1,7 @@
 import { defineConfig } from "@rspack/cli";
 import { rspack, type SwcLoaderOptions } from "@rspack/core";
 import { ReactRefreshRspackPlugin } from "@rspack/plugin-react-refresh";
-
+import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin'
 const isDev = process.env.NODE_ENV === "development";
 
 // Target browsers, see: https://github.com/browserslist/browserslist
@@ -50,7 +50,17 @@ export default defineConfig({
 		new rspack.HtmlRspackPlugin({
 			template: "./index.html"
 		}),
-		isDev ? new ReactRefreshRspackPlugin() : null
+		isDev ? new ReactRefreshRspackPlugin() : null,
+    new MonacoWebpackPlugin({
+      // 不加载任何语言服务 worker，只保留 Monarch 高亮
+      languages: [
+        'javascript',
+        // 'typescript',
+        // 'json',
+        // 'css',
+        // 'html'
+      ],
+    })
 	],
 	optimization: {
 		minimizer: [
