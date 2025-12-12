@@ -1,6 +1,6 @@
 {
   "name": "@canyonjs/report-html",
-  "version": "1.0.0-alpha.6",
+  "version": "1.0.0-alpha.7",
   "scripts": {
     "dev": "rspack dev",
     "build": "rspack build",
@@ -8,9 +8,14 @@
     "preview": "rspack preview"
   },
   "main": "index.js",
-  "files": ["dist","lib","index.js"],
+  "files": [
+    "dist",
+    "lib",
+    "index.js"
+  ],
   "dependencies": {
     "@canyonjs/report-component": "^0.0.1-beta.5",
+    "istanbul-lib-report": "^3.0.1",
     "monaco-editor": "^0.55.1",
     "react": "^19.2.1",
     "react-dom": "^19.2.1"
