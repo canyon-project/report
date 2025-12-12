@@ -1,12 +1,16 @@
 import CanyonReport from '@canyonjs/report-component'
-import {coverageData} from "./assets/coverage-data.ts";
+
+// console.log(window.reportData,'window.reportData')
+
 function App() {
 
-console.log(coverageData)
+  const {files:dataSource} = window.reportData
+
+  console.log(dataSource,'dataSource')
 
   return (
     <div>
-      <CanyonReport name={'deflue'} value={'nihao'}/>
+      <CanyonReport name={'deflue'} value={'nihao'} dataSource={dataSource}/>
     </div>
   )
 }

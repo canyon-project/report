@@ -4,9 +4,6 @@ import { ReactRefreshRspackPlugin } from "@rspack/plugin-react-refresh";
 import MonacoWebpackPlugin from 'monaco-editor-webpack-plugin'
 const isDev = process.env.NODE_ENV === "development";
 
-// Target browsers, see: https://github.com/browserslist/browserslist
-const targets = ["last 2 versions", "> 0.2%", "not dead", "Firefox ESR"];
-
 export default defineConfig({
 	entry: {
 		main: "./src/main.tsx"
@@ -22,6 +19,7 @@ export default defineConfig({
 			},
 			{
 				test: /\.(jsx?|tsx?)$/,
+				exclude: /node_modules\/monaco-editor/,
 				use: [
 					{
 						loader: "builtin:swc-loader",
@@ -39,7 +37,6 @@ export default defineConfig({
 									}
 								}
 							},
-							env: { targets }
 						} satisfies SwcLoaderOptions
 					}
 				]
@@ -52,17 +49,10 @@ export default defineConfig({
 		}),
 		isDev ? new ReactRefreshRspackPlugin() : null,
     new MonacoWebpackPlugin({
-      // 不加载任何语言服务 worker，只保留 Monarch 高亮
-      languages: [
-        'javascript',
-        // 'typescript',
-        // 'json',
-        // 'css',
-        // 'html'
-      ],
+      languages: ['javascript'],
+      globalAPI: true,
     }),
     new rspack.CopyRspackPlugin({
-      // `./src/file.txt` -> `./dist/file.txt`
       patterns: [{ from: 'public' }],
     }),
 	],
@@ -70,7 +60,6 @@ export default defineConfig({
 		minimizer: [
 			new rspack.SwcJsMinimizerRspackPlugin(),
 			new rspack.LightningCssMinimizerRspackPlugin({
-				minimizerOptions: { targets }
 			})
 		]
 	},
