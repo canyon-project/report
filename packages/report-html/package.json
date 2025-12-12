@@ -1,10 +1,10 @@
 {
-  "name": "report-html",
+  "name": "@canyonjs/report-html",
   "private": true,
   "version": "1.0.0",
   "scripts": {
     "dev": "rspack dev",
-    "build": "rm -rf dist && rspack build",
+    "build": "rspack build",
     "test": "vitest run --coverage",
     "preview": "rspack preview"
   },
