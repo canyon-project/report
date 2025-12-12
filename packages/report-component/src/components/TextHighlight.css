@@ -1,0 +1,33 @@
+/* TextHighlight 组件的默认样式 */
+
+/* 默认高亮样式 - 当用户指定 highlightName 时使用 */
+::highlight(text-highlight) {
+  background-color: #ffeb3b;
+  color: #000;
+  border-radius: 2px;
+}
+
+/* 可选的其他高亮样式 */
+::highlight(highlight-primary) {
+  background-color: #2196f3;
+  color: #fff;
+  border-radius: 2px;
+}
+
+::highlight(highlight-success) {
+  background-color: #4caf50;
+  color: #fff;
+  border-radius: 2px;
+}
+
+::highlight(highlight-warning) {
+  background-color: #ff9800;
+  color: #000;
+  border-radius: 2px;
+}
+
+::highlight(highlight-danger) {
+  background-color: #f44336;
+  color: #fff;
+  border-radius: 2px;
+}

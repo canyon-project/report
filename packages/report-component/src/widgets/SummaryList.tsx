@@ -3,6 +3,7 @@ import type { CoverageSummaryData } from 'istanbul-lib-coverage';
 import type { CSSProperties, FC } from 'react';
 // import Highlighter from 'react-highlight-words';
 import { getColor } from '../helpers/color';
+import TextHighlight from "../components/TextHighlight";
 
 const t = (msg: string) => msg;
 const SummaryList: FC<{
@@ -29,7 +30,19 @@ const SummaryList: FC<{
               onSelect(text);
             }}
           >
-            {text}
+            <TextHighlight
+                className={`cccc${text}`}
+                text={text}
+                keywords={filenameKeywords}
+                caseSensitive={false}
+                wholeWords={false}
+                style={{
+                  background: '#f9f9f9',
+                  padding: '15px',
+                  borderRadius: '8px',
+                  lineHeight: '1.6'
+                }}
+            />
             {/*<Highlighter*/}
             {/*  highlightClassName='YourHighlightClass'*/}
             {/*  searchWords={[filenameKeywords]}*/}
