@@ -1,0 +1,11 @@
+{
+  "name": "@canyonjs/report-packages",
+  "version": "3.0.0",
+  "description": "",
+  "private": true,
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+  }
+}
