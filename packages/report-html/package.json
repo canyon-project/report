@@ -1,12 +1,14 @@
 {
   "name": "@canyonjs/report-html",
-  "version": "1.0.0",
+  "version": "1.0.0-alpha.1",
   "scripts": {
     "dev": "rspack dev",
     "build": "rspack build",
     "test": "vitest run --coverage",
     "preview": "rspack preview"
   },
+  "main": "dist/index.js",
+  "files": ["dist","lib","dist/index.js"],
   "dependencies": {
     "@canyonjs/report-component": "workspace:^",
     "monaco-editor": "^0.55.1",
