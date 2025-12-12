@@ -60,7 +60,11 @@ export default defineConfig({
         // 'css',
         // 'html'
       ],
-    })
+    }),
+    new rspack.CopyRspackPlugin({
+      // `./src/file.txt` -> `./dist/file.txt`
+      patterns: [{ from: 'public' }],
+    }),
 	],
 	optimization: {
 		minimizer: [

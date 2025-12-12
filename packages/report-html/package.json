@@ -4,7 +4,7 @@
   "version": "1.0.0",
   "scripts": {
     "dev": "rspack dev",
-    "build": "rspack build",
+    "build": "rm -rf dist && rspack build",
     "test": "vitest run --coverage",
     "preview": "rspack preview"
   },
@@ -21,6 +21,7 @@
     "@types/react": "^19.2.7",
     "@types/react-dom": "^19.2.3",
     "@vitest/coverage-istanbul": "4.0.15",
+    "copy-webpack-plugin": "^13.0.1",
     "monaco-editor-webpack-plugin": "^7.1.1",
     "react-refresh": "^0.18.0",
     "typescript": "^5.9.3",
