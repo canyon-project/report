@@ -7,6 +7,7 @@ import SummaryList from './widgets/SummaryList';
 // import CoverageDetail from './widgets/CoverageDetail';
 // import SummaryHeader from './widgets/SummaryHeader';
 import TopControl from './widgets/TopControl';
+import {ConfigProvider} from "antd";
 
 export const CanyonReport: FC<CanyonReportProps> = ({
   value,
@@ -56,7 +57,11 @@ export const CanyonReport: FC<CanyonReportProps> = ({
   function newOnSelect() {}
 
   return (
-    <div>
+    <ConfigProvider       theme={{
+      token: {
+        colorPrimary: '#0071c2',
+      },
+    }}>
       <TopControl
         onlyChange={onlyChange}
         filenameKeywords={filenameKeywords}
@@ -88,7 +93,7 @@ export const CanyonReport: FC<CanyonReportProps> = ({
           />
         )}
       </Suspense>
-    </div>
+    </ConfigProvider>
   );
 };
 
