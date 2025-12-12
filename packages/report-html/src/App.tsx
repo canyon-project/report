@@ -5,12 +5,9 @@ import CanyonReport from '@canyonjs/report-component'
 function App() {
 
   const {files:dataSource} = window.reportData
-
-  console.log(dataSource,'dataSource')
-
   return (
     <div>
-      <CanyonReport name={'deflue'} value={'nihao'} dataSource={dataSource}/>
+      <CanyonReport name={'未命名'} value={'path/to'} dataSource={dataSource}/>
     </div>
   )
 }

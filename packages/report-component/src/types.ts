@@ -20,4 +20,5 @@ export interface CanyonReportProps {
   name: string;
   /** 当前选中的文件 */
   value: string;
+  dataSource: any[]
 }
