@@ -1,0 +1,25 @@
+{
+  "name": "@canyonjs/report-action",
+  "version": "1.0.0-alpha.1",
+  "description": "Canyon official change detection entry point - generates patch.json for coverage analysis",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "tsc && ncc build dist/index.js -o dist",
+    "dev": "tsc --watch",
+    "test": "vitest"
+  },
+  "keywords": ["canyon", "coverage", "diff", "patch", "github-action"],
+  "author": "Canyon Team",
+  "license": "MIT",
+  "dependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^6.0.0",
+    "@octokit/rest": "^20.0.2"
+  },
+  "devDependencies": {
+    "@types/node": "^20.10.0",
+    "@vercel/ncc": "^0.38.1",
+    "typescript": "^5.3.0",
+    "vitest": "^1.0.0"
+  }
+}

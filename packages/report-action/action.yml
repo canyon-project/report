@@ -1,0 +1,31 @@
+name: 'Canyon Report Action'
+description: 'Generate patch.json for Canyon coverage analysis'
+author: 'Canyon Team'
+
+inputs:
+  mode:
+    description: 'Detection mode: auto | pr | commit'
+    required: false
+    default: 'auto'
+  base:
+    description: 'Base ref for comparison (optional)'
+    required: false
+  head:
+    description: 'Head ref for comparison (optional)'
+    required: false
+  output:
+    description: 'Output path for patch.json'
+    required: false
+    default: 'canyon.patch.json'
+
+outputs:
+  patch:
+    description: 'Path to generated patch.json file'
+
+runs:
+  using: 'node20'
+  main: 'dist/index.js'
+
+branding:
+  icon: 'file-text'
+  color: 'blue'

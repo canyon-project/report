@@ -1,0 +1,20 @@
+{
+  "version": 1,
+  "provider": "github",
+  "event": "pull_request",
+  "base": "main",
+  "head": "feature-branch",
+  "files": [
+    {
+      "path": "src/utils/helper.ts",
+      "status": "modified",
+      "patch": "@@ -15,6 +15,9 @@ export function calculateSum(a: number, b: number): number {\n   return a + b;\n }\n \n+export function calculateProduct(a: number, b: number): number {\n+  return a * b;\n+}\n+\n export function formatNumber(num: number): string {\n   return num.toLocaleString();"
+    },
+    {
+      "path": "src/components/Button.tsx",
+      "status": "added",
+      "patch": "@@ -0,0 +1,12 @@\n+import React from 'react';\n+\n+interface ButtonProps {\n+  onClick: () => void;\n+  children: React.ReactNode;\n+}\n+\n+export function Button({ onClick, children }: ButtonProps) {\n+  return (\n+    <button onClick={onClick}>{children}</button>\n+  );\n+}"
+    }
+  ],
+  "generatedAt": "2025-12-13T09:00:00Z"
+}
