@@ -72,7 +72,6 @@ export const CanyonReport: FC<CanyonReportProps> = ({
   }, [fileCoverage, fileContent]);
 
   const { treeDataSource, rootDataSource, listDataSource } = useMemo(() => {
-    console.log(dataSource,'dataSource','filenameKeywords',filenameKeywords,value)
     return generateCoreDataForEachComponent({
       dataSource,
       filenameKeywords,
