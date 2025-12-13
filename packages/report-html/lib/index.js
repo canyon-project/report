@@ -1,5 +1,6 @@
 const fs = require('node:fs');
 const path = require('node:path');
+const {compress} = require("./compress");
 
 class CoverageReport {
   constructor(options = {}) {
@@ -87,7 +88,7 @@ class CoverageReport {
     // console.log(targetDir,__dirname,process.cwd())
     this.initOptions();
 
-    const _cov = JSON.stringify(coverage);
+    // const _cov = JSON.stringify(coverage);
 
     // 构建报告数据
     const reportData = this.buildReportData(coverage);
@@ -99,7 +100,7 @@ class CoverageReport {
     }
 
     // 生成 report-data.js 文件
-    const reportDataContent = `window.reportData = ${JSON.stringify(reportData, null, 2)};`;
+    const reportDataContent = `window.reportData = '${compress(JSON.stringify(reportData))}';`;
     const reportDataPath = path.join(targetDir, 'report-data.js');
     fs.writeFileSync(reportDataPath, reportDataContent, 'utf8');
 
