@@ -1,4 +1,4 @@
-name: old-canyon-report NPM Publish
+name: publish-canyon-report-html
 
 on:
   push:
