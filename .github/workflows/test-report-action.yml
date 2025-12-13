@@ -5,7 +5,7 @@ on:
     paths:
       - 'packages/report-action/**'
   push:
-    branches: [main]
+    branches: ['*']
     paths:
       - 'packages/report-action/**'
 
