@@ -54,7 +54,7 @@ const reportDataBase64 = window.reportData
 const compressedBytes = base64ToUint8Array(reportDataBase64);
 // 2. gzip解压
 const decompressedText = await decompressGzip(compressedBytes);
-console.log(decompressedText,'decompressedText')
+console.log(JSON.parse(decompressedText),'decompressedText')
 function App() {
 
   const [value,setValue] = useState('')
@@ -82,7 +82,7 @@ function App() {
         resolve({
           fileCoverage: file,
           fileContent: file.source,
-          fileCodeChange: [],
+          fileCodeChange: file.changedLines,
         });
       } else {
         resolve({

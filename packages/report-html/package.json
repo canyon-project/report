@@ -4,7 +4,7 @@
   "scripts": {
     "dev": "rspack dev",
     "build": "rspack build",
-    "test": "vitest run --coverage",
+    "test": "npm run build && vitest run --coverage",
     "preview": "rspack preview"
   },
   "main": "index.js",

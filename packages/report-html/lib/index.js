@@ -37,7 +37,7 @@ class CoverageReport {
     });
   }
 
-  buildReportData(coverage) {
+  buildReportData(coverage, gitDiffData = {}) {
     // 计算总体统计信息
     const summary = {};
 
@@ -56,6 +56,15 @@ class CoverageReport {
         }
       }
 
+      // 查找匹配的 git diff 数据，使用 endsWith 匹配路径
+      let changedLines = [];
+      for (const [gitPath, lines] of Object.entries(gitDiffData)) {
+        if (filePath.endsWith(gitPath)) {
+          changedLines = lines;
+          break;
+        }
+      }
+
       return {
         source,
         path: filePath,
@@ -65,6 +74,7 @@ class CoverageReport {
         s: fileData.s || {},
         f: fileData.f || {},
         b: fileData.b || {},
+        changedLines, // 添加变更行号信息
       };
     });
 
@@ -90,8 +100,23 @@ class CoverageReport {
 
     // const _cov = JSON.stringify(coverage);
 
+    // 读取 git diff 数据
+    let gitDiffData = {};
+    const gitDiffPath = path.join(process.cwd(), 'canyonjs-git-diff.json');
+    if (fs.existsSync(gitDiffPath)) {
+      try {
+        const gitDiffContent = fs.readFileSync(gitDiffPath, 'utf8');
+        gitDiffData = JSON.parse(gitDiffContent);
+        console.log('成功读取 git diff 数据，包含', Object.keys(gitDiffData).length, '个文件的变更信息');
+      } catch (error) {
+        console.warn('读取 canyonjs-git-diff.json 失败:', error.message);
+      }
+    } else {
+      console.log('未找到 canyonjs-git-diff.json 文件');
+    }
+
     // 构建报告数据
-    const reportData = this.buildReportData(coverage);
+    const reportData = this.buildReportData(coverage, gitDiffData);
 
     // 复制dist文件夹内容到targetDir
     const sourceDir = path.resolve(__dirname, '../dist');

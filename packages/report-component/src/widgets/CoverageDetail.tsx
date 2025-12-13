@@ -26,6 +26,7 @@ function CanyonReport({
   }, []);
   return (
     <div>
+      {JSON.stringify(fileCodeChange||[])}
       <div ref={ref} style={{ height: 'calc(100vh - 150px)' }} />
     </div>
   );
