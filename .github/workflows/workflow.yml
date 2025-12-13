@@ -3,7 +3,7 @@ on:
   pull_request:
     types: [opened, synchronize]
   push:
-    branches: [main, master, develop]
+    branches: [main,dev]
 
 jobs:
   diff:
