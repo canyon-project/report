@@ -26,8 +26,8 @@ packages/report-action/
 │   ├── build.sh             # 构建脚本
 │   ├── test-local.js        # 本地测试
 │   └── prepare-release.sh   # 发布准备
-├── .github/workflows/       # CI/CD
-│   └── test.yml             # 测试 workflow
+├── .github/                 # GitHub 配置（仅示例）
+│   └── workflows/           # 实际 workflow 在根目录
 └── dist/                    # 构建输出（需要构建后生成）
     └── index.js             # 打包后的入口文件
 ```
@@ -107,3 +107,17 @@ node scripts/test-local.js
   id: patch
 - run: canyon-report --patch ${{ steps.patch.outputs.patch }}
 ```
+
+## ⚠️ 重要说明
+
+### GitHub Actions Workflow 位置
+- **正确位置**: 根目录 `/.github/workflows/test-report-action.yml`
+- **错误位置**: `packages/report-action/.github/workflows/` ❌
+
+GitHub Actions 只会识别仓库根目录下的 `.github/workflows/` 文件夹中的 workflow 文件。
+
+### Monorepo 中的 Action 测试
+在 monorepo 中测试 Action 时，workflow 需要：
+1. 放在根目录 `.github/workflows/`
+2. 使用相对路径引用：`uses: ./packages/report-action`
+3. 添加路径过滤：`paths: ['packages/report-action/**']`
