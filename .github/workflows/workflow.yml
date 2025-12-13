@@ -27,35 +27,3 @@ jobs:
 
             console.log("FILES", result);
             return result;
-      - uses: actions/github-script@v7
-        id: parse
-        with:
-          script: |
-            const files = ${{ steps.diff.outputs.result }};
-            const changedLines = {};
-
-            for (const file of files) {
-              if (!file.patch) continue;
-
-              const lines = file.patch.split('\n');
-              let newLine = 0;
-
-              changedLines[file.filename] = [];
-
-              for (const line of lines) {
-                if (line.startsWith('@@')) {
-                  const match = /@@ -\d+(?:,\d+)? \+(\d+)(?:,(\d+))? @@/.exec(line);
-                  if (match) {
-                    newLine = parseInt(match[1], 10);
-                  }
-                } else if (line.startsWith('+') && !line.startsWith('+++')) {
-                  changedLines[file.filename].push(newLine);
-                  newLine++;
-                } else if (!line.startsWith('-')) {
-                  newLine++;
-                }
-              }
-            }
-
-            console.log(JSON.stringify(changedLines, null, 2));
-            return changedLines;
